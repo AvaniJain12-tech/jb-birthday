@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Memory Jar 🫙✨</title>
+  <link rel="stylesheet" href="janvi.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Pinyon+Script&family=Crimson+Pro:ital,wght@0,300;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+ 
+  <!-- ============================
+       CUSTOM CURSOR GLOW
+  ============================= -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+ 
+  <!-- ============================
+       LOADING SCREEN
+  ============================= -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-inner">
+      <div class="loading-jar">🫙</div>
+      <p class="loading-text">opening your memories...</p>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+    </div>
+  </div>
+ 
+  <!-- ============================
+       STAR / PARTICLE BACKGROUND
+  ============================= -->
+  <canvas id="starsCanvas"></canvas>
+ 
+  <!-- ============================
+       MUSIC PLAYER
+  ============================= -->
+  <div class="music-player" id="musicPlayer">
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" title="Play/Pause">
+      <span id="musicIcon">▶</span>
+    </button>
+    <div class="music-label">
+      <span id="musicTitle">your playlist</span>
+      <div class="music-wave" id="musicWave">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <!-- Replace music.mp3 with your local file -->
+    <audio id="bgMusic" loop>
+      <source src="https://www.jiosaavn.com/song/janu-meri-jaan-from-shaan/Jz84SQZmZEE" type="audio/mpeg"/>
+    </audio>
+  </div>
+ 
+  <!-- ============================
+       MAIN WRAPPER
+  ============================= -->
+  <div class="wrapper" id="mainWrapper">
+ 
+    <!-- ============================
+         HERO / LANDING SECTION
+    ============================= -->
+    <section class="hero">
+      <div class="hero-glow-orb orb1"></div>
+      <div class="hero-glow-orb orb2"></div>
+      <div class="hero-glow-orb orb3"></div>
+ 
+      <div class="hero-content">
+        <p class="hero-eyebrow">✦ for you, always ✦</p>
+        <h1 class="hero-title">
+          <span class="title-word">Digital</span>
+          <span class="title-word script">Memory</span>
+          <span class="title-word">Jar</span>
+        </h1>
+        <p class="hero-sub">a secret archive of us — curated with love, kept forever 🫙</p>
+ 
+        <!-- FRIENDSHIP POEM -->
+        <div class="poem-card">
+          <div class="poem-deco">❝</div>
+          <div class="poem-lines">
+            <p>ten years of whispers, silly laughs, and staying late,</p>
+            <p>of finding home in someone else before it got too great.</p>
+            <p>we grew up tangled — two souls sharing the same sky,</p>
+            <p>through every storm and soft dawn, I never said goodbye.</p>
+            <p>you are the chapter I'd re-read a thousand times again,</p>
+            <p>my chosen family dressed in starlight, joy, and then—</p>
+            <p>whatever comes, wherever we drift, however far we roam,</p>
+            <p>you'll always be my favourite kind of home. 🌙</p>
+          </div>
+          <div class="poem-sig">— with all of me, always</div>
+        </div>
+ 
+        <!-- SPOTIFY SECTION -->
+        <div class="spotify-card">
+          <div class="spotify-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="12" fill="#1DB954"/>
+              <path d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6-.15-.5.15-1 .6-1.15 3.55-1.05 9.45-.85 13.2 1.35.45.25.6.85.35 1.3-.25.35-.85.5-1.3.25zm-.1 2.8c-.25.35-.7.5-1.05.25-2.7-1.65-6.8-2.15-9.95-1.15-.4.1-.85-.1-.95-.5-.1-.4.1-.85.5-.95 3.65-1.1 8.15-.55 11.25 1.35.3.15.45.65.2 1zm-1.2 2.75c-.2.3-.55.4-.85.2-2.35-1.45-5.3-1.75-8.8-.95-.35.1-.65-.15-.75-.45-.1-.35.15-.65.45-.75 3.8-.85 7.1-.5 9.7 1.1.35.15.4.55.25.85z" fill="white"/>
+            </svg>
+          </div>
+          <div class="spotify-text">
+            <p class="spotify-label">our soundtrack 🎵</p>
+            <!-- REPLACE href with your Spotify playlist link -->
+            <a href="https://open.spotify.com/playlist/0PhCj2GWBOMl8vE5b110ve?si=nUAHuWeQTZ-5AM4gzmtbcQ&pt=adaddfbc183f2bea258ce6e00e1b6050" target="_blank" class="spotify-link">
+              open our playlist ↗
+            </a>
+          </div>
+        </div>
+ 
+        <div class="scroll-hint">↓ open your memories ↓</div>
+      </div>
+    </section>
+ 
+    <!-- ============================
+         MEMORY BUTTONS SECTION
+    ============================= -->
+    <section class="memory-section">
+      <h2 class="section-title">✦ open a memory ✦</h2>
+      <p class="section-sub">pick how you're feeling right now</p>
+ 
+      <div class="memory-grid">
+        <button class="mem-btn" data-type="stressed" onclick="openMemory('stressed')">
+          <span class="btn-icon">🌿</span>
+          <span class="btn-label">open when stressed</span>
+        </button>
+        <button class="mem-btn" data-type="sad" onclick="openMemory('sad')">
+          <span class="btn-icon">🌙</span>
+          <span class="btn-label">open when sad</span>
+        </button>
+        <button class="mem-btn btn-pink" data-type="serotonin" onclick="openMemory('serotonin')">
+          <span class="btn-icon">✨</span>
+          <span class="btn-label">emergency serotonin</span>
+        </button>
+        <button class="mem-btn" data-type="future" onclick="openMemory('future')">
+          <span class="btn-icon">💌</span>
+          <span class="btn-label">future message</span>
+        </button>
+        <button class="mem-btn btn-gold" data-type="surprise" onclick="openMemory('surprise')">
+          <span class="btn-icon">🎲</span>
+          <span class="btn-label">surprise memory</span>
+        </button>
+        <button class="mem-btn" data-type="capsule" onclick="openMemory('capsule')">
+          <span class="btn-icon">⏳</span>
+          <span class="btn-label">time capsule</span>
+        </button>
+        <button class="mem-btn btn-secret" data-type="vault" onclick="openVaultPrompt()">
+          <span class="btn-icon">🔐</span>
+          <span class="btn-label">secret vault</span>
+        </button>
+        <button class="mem-btn btn-random" data-type="random" onclick="openMemory('random')">
+          <span class="btn-icon">🌀</span>
+          <span class="btn-label">random memory</span>
+        </button>
+      </div>
+    </section>
+ 
+    <!-- ============================
+         MEMORY DISPLAY CARD
+    ============================= -->
+    <section class="memory-display" id="memoryDisplay" style="display:none;">
+      <div class="memory-card" id="memoryCard">
+        <button class="close-card" onclick="closeMemory()">✕</button>
+        <div class="card-bg-overlay" id="cardBgOverlay"></div>
+        <div class="card-inner">
+          <div class="card-tag" id="cardTag">memory</div>
+          <div class="memory-image-wrap">
+            <img id="memoryImage" src="" alt="memory" class="memory-img" />
+            <div class="img-shine"></div>
+          </div>
+          <p class="memory-message" id="memoryMessage"></p>
+          <div class="memory-date" id="memoryDate"></div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ============================
+         VAULT MODAL
+    ============================= -->
+    <div class="modal-overlay" id="vaultModal" style="display:none;">
+      <div class="vault-modal">
+        <div class="vault-lock">🔐</div>
+        <h3 class="vault-title">secret vault</h3>
+        <p class="vault-hint">only you know the password, love</p>
+        <input type="password" id="vaultInput" class="vault-input" placeholder="enter the magic word..." />
+        <button class="vault-btn" onclick="checkVaultPassword()">unlock ✦</button>
+        <button class="vault-close" onclick="closeVault()">maybe later</button>
+      </div>
+    </div>
+ 
+    <!-- VAULT DISPLAY -->
+    <div class="modal-overlay" id="vaultDisplay" style="display:none;">
+      <div class="vault-reveal">
+        <button class="vault-close" onclick="closeVaultDisplay()">✕</button>
+        <div class="vault-stars">✦ ✧ ✦ ✧ ✦</div>
+        <img src="secretjanvi.jpeg" alt="secret" class="vault-img" />
+        <p class="vault-message" id="vaultMessage"></p>
+      </div>
+    </div>
+ 
+    <!-- ERROR POPUP -->
+    <div class="error-popup" id="errorPopup" style="display:none;">
+      <span class="error-icon">🙈</span>
+      <p id="errorText">that's not quite right, darling</p>
+    </div>
+ 
+    <!-- ============================
+         FAKE CHAT SECTION
+    ============================= -->
+    <section class="chat-section">
+      <h2 class="section-title">✦ our conversations ✦</h2>
+      <p class="section-sub">screenshots from a lifetime of us</p>
+ 
+      <div class="chat-container">
+        <div class="chat-date-pill">10 years ago 🌙</div>
+ 
+        <div class="chat-bubble them">
+          <div class="chat-avatar">💫</div>
+          <div class="bubble-wrap">
+            <p>okay but imagine if we're still best friends at 30</p>
+            <span class="chat-time">11:47 PM</span>
+          </div>
+        </div>
+        <div class="chat-bubble me">
+          <div class="bubble-wrap">
+            <p>we WILL be. i'm not giving you a choice lmao</p>
+            <span class="chat-time">11:48 PM</span>
+          </div>
+          <div class="chat-avatar">🌸</div>
+        </div>
+        <div class="chat-bubble them">
+          <div class="chat-avatar">💫</div>
+          <div class="bubble-wrap">
+            <p>okay deal. pinky promise?</p>
+            <span class="chat-time">11:49 PM</span>
+          </div>
+        </div>
+        <div class="chat-bubble me">
+          <div class="bubble-wrap">
+            <p>pinky promise. now shut up and watch the movie 🎬</p>
+            <span class="chat-time">11:49 PM</span>
+          </div>
+          <div class="chat-avatar">🌸</div>
+        </div>
+ 
+        <div class="chat-date-pill">5 years ago ⭐</div>
+ 
+        <div class="chat-bubble them">
+          <div class="chat-avatar">💫</div>
+          <div class="bubble-wrap">
+            <p>I don't know what I'd do without you honestly</p>
+            <span class="chat-time">2:13 AM</span>
+          </div>
+        </div>
+        <div class="chat-bubble me">
+          <div class="bubble-wrap">
+            <p>good thing you'll never have to find out 🤍</p>
+            <span class="chat-time">2:14 AM</span>
+          </div>
+          <div class="chat-avatar">🌸</div>
+        </div>
+        <div class="chat-bubble them">
+          <div class="chat-avatar">💫</div>
+          <div class="bubble-wrap">
+            <p>stop making me cry at 2am oh my god</p>
+            <span class="chat-time">2:14 AM</span>
+          </div>
+        </div>
+        <div class="chat-bubble me">
+          <div class="bubble-wrap">
+            <p>no but also yes. okay now cry. 💕</p>
+            <span class="chat-time">2:15 AM</span>
+          </div>
+          <div class="chat-avatar">🌸</div>
+        </div>
+ 
+        <div class="chat-date-pill">last week 🌷</div>
+ 
+        <div class="chat-bubble them">
+          <div class="chat-avatar">💫</div>
+          <div class="bubble-wrap">
+            <p>just thinking about how lucky I am that you exist</p>
+            <span class="chat-time">9:31 PM</span>
+          </div>
+        </div>
+        <div class="chat-bubble me">
+          <div class="bubble-wrap">
+            <p>okay I MADE this website for you because same 🥹</p>
+            <span class="chat-time">9:32 PM</span>
+          </div>
+          <div class="chat-avatar">🌸</div>
+        </div>
+        <div class="chat-bubble them">
+          <div class="chat-avatar">💫</div>
+          <div class="bubble-wrap">
+            <p>you're so unhinged and I love you for it 😭✨</p>
+            <span class="chat-time">9:33 PM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ============================
+         EASTER EGG SECTION (hidden)
+    ============================= -->
+    <div class="easter-egg" id="easterEgg" onclick="triggerEasterEgg()">🌸</div>
+ 
+    <!-- ============================
+         FOOTER
+    ============================= -->
+    <footer class="footer">
+      <p class="footer-text">made with excessive love & too many late nights 🫙</p>
+      <p class="footer-sub">for you. always you.forever</p>
+    </footer>
+ 
+  </div><!-- end wrapper -->
+ 
+  <!-- CONFETTI CANVAS -->
+  <canvas id="confettiCanvas"></canvas>
+ 
+  <script src="janvi.js"></script>
+</body>
+</html>
